@@ -2,17 +2,21 @@ pipeline {
   agent any
 
   stages {
-    stage('Build Docker Image') {
+    stage('Clone Repo') {
       steps {
-        bat 'docker build -t demo-webapp .'
+        git 'https://github.com/<your-username>/docker-jenkins-demo.git'
       }
     }
-
+    stage('Build Docker Image') {
+      steps {
+        sh 'docker build -t demo-webapp .'
+      }
+    }
     stage('Run Docker Container') {
       steps {
-        bat '''
-          docker rm -f demo-web-container || exit 0
-          docker run -d --name demo-web-container -p 8080:80 demo-webapp
+        sh '''
+        docker rm -f demo-web-container || true
+        docker run -dit --name demo-web-container -p 8080:80 demo-webapp
         '''
       }
     }
