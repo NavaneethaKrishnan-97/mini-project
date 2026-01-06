@@ -34,7 +34,7 @@ pipeline {
     sh '''
     ssh -i /var/lib/jenkins/mykey.pem ubuntu@15.206.145.105 "
       docker ps -q --filter name=demo-web-container | xargs -r docker rm -f
-      docker run -d --name demo-web-container -p 8080:80 demo-webapp
+      docker run -d --name demo-web-container -p 9091:80 demo-webapp
     "
     '''
      }
