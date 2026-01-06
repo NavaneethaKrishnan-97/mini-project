@@ -1,6 +1,5 @@
 pipeline {
-  agent { label 'docker'}
-
+  agent all
   stages {
     stage('Clone Repo') {
       steps {
