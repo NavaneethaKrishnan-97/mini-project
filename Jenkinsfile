@@ -15,8 +15,8 @@ pipeline {
                 sh '''
                 ssh -o StrictHostKeyChecking=no \
                     -o BatchMode=yes \
-                    -i /home/ubuntu/mykey.pem \
-                    ubuntu@15.206.145.105 << EOF
+                    -i /var/lib/jenkins/mykey.pem \
+                    ubuntu@15.206.xx.xx << EOF
 
                   docker build -t demo-webapp .
                 EOF
@@ -29,8 +29,8 @@ pipeline {
                 sh '''
                 ssh -o StrictHostKeyChecking=no \
                     -o BatchMode=yes \
-                    -i /home/ubuntu/mykey.pem \
-                    ubuntu@15.206.145.105 << EOF
+                    -i /var/lib/jenkins/mykey.pem \
+                    ubuntu@15.206.xx.xx << EOF
 
                   docker rm -f demo-web-container || true
                   docker run -dit --name demo-web-container -p 8080:80 demo-webapp
