@@ -1,10 +1,10 @@
 pipeline {
-  agent any
+  agent { label 'docker'}
 
   stages {
     stage('Clone Repo') {
       steps {
-        git 'https://github.com/<your-username>/docker-jenkins-demo.git'
+        git 'https://github.com/NavaneethaKrishnan-97/mini-project.git'
       }
     }
     stage('Build Docker Image') {
