@@ -31,13 +31,13 @@ pipeline {
 
     stage('Run Docker Container on Docker Host') {
       steps {
-        sh '''
-        ssh -i /var/lib/jenkins/mykey.pem ubuntu@15.206.145.105 "
-          docker rm -f demo-web-container || true &&
-          docker run -d -p 8080:80 --name demo-web-container demo-webapp
-        "
-        '''
-      }
+    sh '''
+    ssh -i /var/lib/jenkins/mykey.pem ubuntu@15.206.145.105 "
+      docker ps -q --filter name=demo-web-container | xargs -r docker rm -f
+      docker run -d --name demo-web-container -p 8080:80 demo-webapp
+    "
+    '''
+     }
     }
   }
 }
