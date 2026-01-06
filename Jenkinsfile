@@ -20,10 +20,7 @@ pipeline {
     stage('Build Docker Image on Docker Host') {
       steps {
         sh '''
-        ssh -i /var/lib/jenkins/mykey.pem ubuntu@15.206.145.105 << 'EOF'
-        cd /home/ubuntu/mini-project
-        docker build -t demo-webapp .
-        EOF
+        ssh -i /var/lib/jenkins/mykey.pem ubuntu@15.206.145.105 "cd /home/ubuntu/mini-project && docker build -t demo-webapp ."
         '''
       }
     }
@@ -31,10 +28,10 @@ pipeline {
     stage('Run Docker Container on Docker Host') {
       steps {
         sh '''
-        ssh -i /var/lib/jenkins/mykey.pem ubuntu@15.206.145.105 << 'EOF'
-        docker rm -f demo-web-container || true
-        docker run -d -p 8080:80 --name demo-web-container demo-webapp
-        EOF
+        ssh -i /var/lib/jenkins/mykey.pem ubuntu@15.206.145.105 "
+          docker rm -f demo-web-container || true &&
+          docker run -d -p 8080:80 --name demo-web-container demo-webapp
+        "
         '''
       }
     }
