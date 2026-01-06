@@ -10,11 +10,15 @@ pipeline {
     }
 
     stage('Copy files to Docker Host') {
-      steps {
-        sh '''
-        scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/mykey.pem -r . ubuntu@15.206.145.105:/home/ubuntu/mini-project
-        '''
-      }
+     steps {
+    sh '''
+    rsync -av --delete \
+      --exclude='.git' \
+      --exclude='.gitignore' \
+      -e "ssh -i /var/lib/jenkins/mykey.pem -o StrictHostKeyChecking=no" \
+      ./ ubuntu@15.206.145.105:/home/ubuntu/mini-project/
+    '''
+  }
     }
 
     stage('Build Docker Image on Docker Host') {
