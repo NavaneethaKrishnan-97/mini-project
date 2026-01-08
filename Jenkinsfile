@@ -1,13 +1,14 @@
 pipeline {
-  agent { label 'docker' }
+  agent none
 
-  options {
-    skipDefaultCheckout(true)
-  }
-
-tools {
-    git 'linux-git'
-  }
+  stages {
+    stage('Checkout') {
+      agent { label 'docker-agent' }
+      tools { git 'linux-git' }
+      steps {
+        checkout scm
+      }
+    }
   
   stages {
     stage('Clone Repo') {
