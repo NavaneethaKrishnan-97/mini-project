@@ -3,7 +3,7 @@ pipeline {
 
   stages {
     stage('Checkout') {
-      agent { label 'docker-agent' }
+      agent { label 'docker-agent' } // runs everything on your Linux agent
       tools { git 'linux-git' }
       steps {
         checkout scm
