@@ -13,7 +13,7 @@ pipeline {
 
           docker rm -f demo-web-container || true
           docker build -t demo-webapp .
-          docker run -dit --name demo-web-container -p 9092:80 demo-webapp
+          docker run -dit -p 9092:80 --name demo-web-container demo-webapp
         EOF
         '''
       }
