@@ -9,9 +9,7 @@ pipeline {
         checkout scm
       }
     }
-  }
-  
-  stages {
+
     stage('Clone Repo') {
       steps {
         git branch:'master', url:'https://github.com/NavaneethaKrishnan-97/mini-project.git'
