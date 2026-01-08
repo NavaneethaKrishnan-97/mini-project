@@ -1,16 +1,7 @@
 pipeline {
-  agent none
-
-  stages {
-    stage('Checkout') {
-      agent { label 'docker-agent' } // runs everything on your Linux agent
-      tools { git 'linux-git' }
-      steps {
-        checkout scm
-      }
-    }
-
-    stage('Clone Repo') {
+  agent { label 'docker-agent' } // runs everything on your Linux agent
+    stages {
+        'Clone Repo') {
       steps {
         git branch:'master', url:'https://github.com/NavaneethaKrishnan-97/mini-project.git'
       }
