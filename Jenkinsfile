@@ -1,6 +1,10 @@
 pipeline {
   agent { label 'docker' }
 
+  options {
+    skipDefaultCheckout(true)
+  }
+
 tools {
     git 'linux-git'
   }
