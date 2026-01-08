@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docker' } // Force everything to run on your Linux agent
+    agent { label 'docker-agent' } // Force everything to run on your Linux agent
 
     tools {
         git 'Default' // Make sure Git is installed on the agent
