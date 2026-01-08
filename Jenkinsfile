@@ -1,6 +1,10 @@
 pipeline {
   agent { label 'docker' }
 
+tools {
+    git 'linux-git'
+  }
+  
   stages {
     stage('Clone Repo') {
       steps {
