@@ -1,16 +1,18 @@
 pipeline {
-    agent { label 'docker' }
+    agent { label 'docker-agent' }
+
+    options { skipDefaultCheckout() }
 
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main', url: 'https://github.com/NavaneethaKrishnan-97/mini-project.git'
+                sh 'git clone https://github.com/NavaneethaKrishnan-97/mini-project.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t demo-webapp .'
+                sh 'docker build -t demo-webapp ./mini-project'
             }
         }
 
