@@ -1,25 +1,40 @@
 pipeline {
-    agent { label 'docker-agent' }  // use your Linux agent
+    agent { label 'docker' } // Force everything to run on your Linux agent
+
+    tools {
+        git 'Default' // Make sure Git is installed on the agent
+    }
 
     stages {
-        stage('Checkout') {
+        stage('Clone Repo') {
             steps {
-                // Runs on Linux agent, uses Linux Git
-                git url: 'https://github.com/NavaneethaKrishnan-97/mini-project.git'
+                // Checkout happens on the agent
+                git branch: 'main', url: 'https://github.com/NavaneethaKrishnan-97/mini-project.git'
             }
         }
+
         stage('Build Docker Image') {
             steps {
                 sh 'docker build -t demo-webapp .'
             }
         }
+
         stage('Run Docker Container') {
             steps {
                 sh '''
                 docker rm -f demo-web-container || true
-                docker run -dit --name demo-web-container -p 9091:80 demo-webapp
+                docker run -dit --name demo-web-container -p 8080:80 demo-webapp
                 '''
             }
+        }
+    }
+
+    post {
+        success {
+            echo "Pipeline completed successfully!"
+        }
+        failure {
+            echo "Pipeline failed!"
         }
     }
 }
