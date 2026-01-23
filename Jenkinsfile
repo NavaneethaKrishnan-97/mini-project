@@ -5,7 +5,7 @@ pipeline {
     stage('Build & Run Docker from GitHub') {
       steps {
         sh '''
-ssh -o StrictHostKeyChecking=no ubuntu@43.205.98.244 <<'EOF'
+ssh -o StrictHostKeyChecking=no ubuntu@3.110.197.178 <<'EOF'
 rm -rf mini-project
 git clone https://github.com/NavaneethaKrishnan-97/mini-project.git
 cd mini-project
